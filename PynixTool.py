@@ -32,7 +32,7 @@ def scriptList(dir):
 
     for file in os.listdir(dir):
         d = os.path.join(dir, file)
-        if(d.lower() != __file__.lower() and d.endswith(".py")):
+        if(d.lower() != __file__.lower() and os.path.isfile(d) and d.endswith(".py")):
             scripts.append(d)
             fileSize = fileSize_(os.path.getsize(d))
             print("["+str(i)+"] > " + os.path.basename(d) + " | " + str(fileSize[0][0]) + " " + str(fileSize[0][1]))
