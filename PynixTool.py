@@ -25,13 +25,13 @@ def fileSize_(fileSize):
 
     return size
 
-def scriptList():
+def scriptList(dir):
 
     scripts = []
     i = 0
 
-    for file in os.listdir(os.getcwd()):
-        d = os.path.join(os.getcwd(), file)
+    for file in os.listdir(dir):
+        d = os.path.join(dir, file)
         if(d.lower() != __file__.lower() and d.endswith(".py")):
             scripts.append(d)
             fileSize = fileSize_(os.path.getsize(d))
@@ -48,10 +48,16 @@ def isInt(s):
         return False
 
 printLogo()
-scripts = scriptList()
-if(len(scripts) == 0):
-    print("Error! No Scripts Found in > " + os.getcwd())
-    exit(1)
+scripts = scriptList(os.getcwd())
+
+while True:
+    if(len(scripts) == 0):
+        print("Error! No Scripts Found in Current Path > " + os.getcwd())
+        dir = input("Please Enter a Directory > ")
+        print("")
+        scripts = scriptList(dir)
+    else:
+        break
 
 print("")
 script = 0
